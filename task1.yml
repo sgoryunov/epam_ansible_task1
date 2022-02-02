@@ -1,0 +1,16 @@
+---
+- name: task1
+  hosts: node1.example.com
+  user: ansible
+  become: yes
+  become_method: sudo
+  become_user: root
+
+  tasks:
+  - name: Ensure nano presented
+    package: 
+      name: 
+        - nano
+        - nmap
+      state: presented
+...
