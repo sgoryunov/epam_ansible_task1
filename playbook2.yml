@@ -14,7 +14,7 @@
 
   - name: Ensure file is absent
     file:
-      src: /var/www/html/index.html
+      path: /var/www/html/index.html
       state: absent
   
   - name: Ensure firewall closed port
