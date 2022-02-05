@@ -7,7 +7,7 @@
   become_user: root
 
   tasks:
-  - name: Ensure httpd and firewalld are absented
+  - name: Ensure httpd is absented
     package:
       name: httpd
       state: absent

@@ -1,0 +1,21 @@
+---
+- name: playbook1
+  hosts: node1.example.com
+  user: ansible
+  become: yes
+  become_method: sudo
+  become_user: root
+
+  tasks:
+
+  - name: Ensure grub file is changed
+    lineinfile:
+      path: /etc/default/grub
+      regexp: '^"{{item}}"='
+      line: "{{item}}=0"
+    with_items: ['net.ifnames=','biosdevname=']
+
+  # - name: Update grub
+  #   shell:
+  #     cmd: 'grub2-mkconfig -o /boot/grub2/grub.cfg'
+...
