@@ -11,8 +11,8 @@
   - name: Ensure grub file is changed
     lineinfile:
       path: /etc/default/grub
-      regexp: '^"{{item}}"='
-      line: "{{item}}=0"
+      regexp: '^"{{item}}"'
+      line: "{{item}}1"
     with_items: ['net.ifnames=','biosdevname=']
 
   # - name: Update grub
