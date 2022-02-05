@@ -1,3 +1,4 @@
+---
 - name: playbook2
   hosts: node1.example.com
   user: ansible
@@ -8,7 +9,16 @@
   tasks:
   - name: Ensure httpd and firewalld are absented
     package:
-      name:
-      - httpd
-      - firewalld
+      name: httpd
       state: absent
+
+  - name: Ensure file is absent
+    file:
+      src: /var/www/html/index.html
+      state: absent
+  
+  - name: Ensure firewall closed port
+    firewalld:
+      port: 80/tcp
+      state: disabled
+...
