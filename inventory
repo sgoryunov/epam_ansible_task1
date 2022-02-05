@@ -1,2 +1,2 @@
-[slaves]
+[nodes]
 node[1:2].example.com

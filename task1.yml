@@ -7,10 +7,23 @@
   become_user: root
 
   tasks:
-  - name: Ensure nano presented
+  - name: Ensure httpd presented
     package: 
-      name: 
-        - nano
-        - nmap
-      state: presented
+      name: httpd
+      state: absent
+
+  - name: Ensure service is started
+    service:
+      name: httpd
+      state: started
+
+  - name: Esure html file is copied
+    copy:
+      src: example.html 
+      dest: /var/www/html/index.html
+
+  - name: Ensure firewall allowed connection
+    firewalld:
+      port: 80/http
+      state: enabled
 ...
