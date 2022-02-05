@@ -1,5 +1,5 @@
 ---
-- name: task1
+- name: playbook1
   hosts: node1.example.com
   user: ansible
   become: yes
@@ -7,27 +7,30 @@
   become_user: root
 
   tasks:
-  - name: Ensure httpd presented
-    package: 
-      name: httpd
-      state: present
-
-  - name: Ensure service is started
-    service:
-      name: 
+  - name: Ensure httpd and firewalld are presented
+    package:
+      name:
       - httpd
       - firewalld
+      state: present
+
+  - name: Ensure service httpd is started
+    service:
+      name: httpd
       state: started
 
   - name: Esure html file is copied
     copy:
-      src: example.html 
+      src: example.html
       dest: /var/www/html/index.html
+
+  - name: Ensure service firewalld is started
+    service:
+      name: firewalld
+      state: started
 
   - name: Ensure firewall allowed connection
     firewalld:
-      #port: 80/http
-      service: httpd
-      permanent: yes
+      port: 80/tcp
       state: enabled
 ...
