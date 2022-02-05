@@ -14,7 +14,9 @@
 
   - name: Ensure service is started
     service:
-      name: httpd
+      name: 
+      - httpd
+      - firewalld
       state: started
 
   - name: Esure html file is copied
