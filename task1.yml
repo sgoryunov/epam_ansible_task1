@@ -10,7 +10,7 @@
   - name: Ensure httpd presented
     package: 
       name: httpd
-      state: absent
+      state: present
 
   - name: Ensure service is started
     service:
