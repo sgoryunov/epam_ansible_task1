@@ -26,6 +26,8 @@
 
   - name: Ensure firewall allowed connection
     firewalld:
-      port: 80/http
+      #port: 80/http
+      service: httpd
+      permanent: yes
       state: enabled
 ...
