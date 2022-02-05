@@ -1,0 +1,14 @@
+- name: playbook2
+  hosts: node1.example.com
+  user: ansible
+  become: yes
+  become_method: sudo
+  become_user: root
+
+  tasks:
+  - name: Ensure httpd and firewalld are absented
+    package:
+      name:
+      - httpd
+      - firewalld
+      state: absent
