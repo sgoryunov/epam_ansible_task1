@@ -10,12 +10,22 @@
 
   - name: Ensure grub file is changed
     lineinfile:
-      path: /etc/default/grub
-      regexp: '^"{{item}}"'
-      line: "{{item}}1"
-    with_items: ['net.ifnames=','biosdevname=']
+      path: ./grub
+      regexp:  '^(GRUB_CMDLINE_LINUX=.*)(net\.ifnames=[0-9])(.*)'
+      line:  '\1net.ifnames=0\3'
+      # regexp: '^GRUB_CMDLINE_LINUX='
+      # line: 'GRUB_CMDLINE_LINUX="net.ifnames=0 biosdevname=0"'
+      backrefs: yes
+      backup: yes
 
-  # - name: Update grub
-  #   shell:
-  #     cmd: 'grub2-mkconfig -o /boot/grub2/grub.cfg'
+  - name: Ensure grub file is changed
+    lineinfile:
+      path: ./grub
+      regexp: '^(GRUB_CMDLINE_LINUX=.*)(biosdevname=[0-9])(.*)'
+      line: '\1biosdevname=0\3'
+      backrefs: yes
+
+  - name: Update grub
+    shell:
+      cmd: 'grub2-mkconfig -o /boot/grub2/grub.cfg'
 ...
